@@ -25,3 +25,68 @@
     padding: 0.7rem;
     font-weight: bold;
 }
+.all-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container-2{
+    width: 78vw;
+    height: 95vh;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-image: url(img/stncrs.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 1.2rem;
+}
+.zone-1-a{
+    border: 5px solid green;
+    width: 28.4rem;
+    height: 13.7rem;
+}
+.zone-1-b{
+    border: 5px solid blue;
+    width: 28.4rem;
+    height: 28rem;
+}
+.zone-container-1{
+    width: 28.4rem;
+    height: 41.7rem;
+}
+.zone-container-2{
+    width: 33.8rem;
+    height: 42.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.zoneoff-2-2{
+    display: flex;
+    justify-content: space-between;
+}
+.zoneoff-2-1{
+    display: flex;
+    justify-content: space-between;
+}
+.zone-1-1{
+    border: 3px solid red;
+    width: 16rem;
+    height: 14.5rem;
+}
+.zone-1-2{
+    border: 3px solid rgb(0, 234, 255);
+    width: 16.6rem;
+    height: 14.5rem;
+}
+.zone-2-1{
+    border: 5px solid rgb(26, 73, 18);
+    width: 16rem;
+    height: 14rem;
+}
+.zone-2-2{
+    border: 5px solid rgb(162, 66, 207);
+    width: 16.6rem;
+    height: 14rem;
+}

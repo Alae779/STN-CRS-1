@@ -1,0 +1,27 @@
+.container-1{
+    height: 95vh;
+    width: 20vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.container-1 h1{
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+}
+.workers-list{
+    height: fit-content;
+    border: 1px solid rgb(0, 0, 0);
+    margin-inline: 1rem;
+}
+.add-newworker-btn button{
+    background-color: rgb(41, 171, 41);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 1rem;
+    padding: 0.7rem;
+    font-weight: bold;
+}

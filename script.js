@@ -54,11 +54,16 @@ function submitworker(e){
     let fullname = document.getElementById("worker-name").value;
     let role = document.getElementsByTagName("select")[0].value;
     let image = document.getElementById("worker-photo").value;
+    let email = document.getElementById("worker-email").value;
+    let number = document.getElementById("worker-number").value;
 
     let workersobj = {
         name: fullname,
         role: role,
         image: image,
+        email: email,
+        number: number,
+        experiences: experiences,
     }
     unworkers.push(workersobj);
     console.log(unworkers);
@@ -70,6 +75,15 @@ function submitworker(e){
         <div>${role}</div>
         </div>
     `
+    document.getElementById("worker-name").value = "";
+    document.getElementsByTagName("select")[0].value = "Receptionist";
+    document.getElementById("worker-photo").value = "";
+    document.getElementById("worker-role").value = "";
+    document.getElementById("pre-img").style.backgroundImage = "none";
+    document.getElementById("worker-email").value = "";
+    document.getElementById("worker-number").value = "";
+
+    experiences = [];
     
 }
 imglink.addEventListener("change", (e) => {

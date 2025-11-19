@@ -57,6 +57,25 @@ function submitworker(e){
     let email = document.getElementById("worker-email").value;
     let number = document.getElementById("worker-number").value;
 
+    let urlregex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/
+    let emailregex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    let numberregex = /^\+?[0-9\s\-]{7,15}$/
+
+    if (!urlregex.test(imglink.value)) {
+    alert("Invalid image url!");
+    return;
+    }
+
+    if (!emailregex.test(email)) {
+    alert("Invalid email!");
+    return;
+    }
+
+    if (!numberregex.test(number)) {
+    alert("Invalid phone number!");
+    return;
+    }
+
     let workersobj = {
         name: fullname,
         role: role,
@@ -69,12 +88,16 @@ function submitworker(e){
     console.log(unworkers);
     let listofworkers = document.getElementById("workers-list")
     listofworkers.innerHTML += `
-        <div class="workers-lists">
-        <div class="img-style" style=background: url(${image})></div>
+        
+    <div class="workers-lists" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
+        <div class="img-style" style="width:50px; height:50px; border-radius:50%; background: url('${image}') no-repeat center/cover;"></div>
+        <div>
         <div>${fullname}</div>
         <div>${role}</div>
         </div>
-    `
+        
+    </div>`;
+
     document.getElementById("worker-name").value = "";
     document.getElementsByTagName("select")[0].value = "Receptionist";
     document.getElementById("worker-photo").value = "";
@@ -92,7 +115,10 @@ imglink.addEventListener("change", (e) => {
     })
 
 
-
+let workerdetails = document.querySelector(".workers-list")
+workerdetails.addEventListener("click", (e) => {
+    
+})
     //experience
     // new array of exp
     // addEventListener click

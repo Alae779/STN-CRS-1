@@ -95,7 +95,10 @@ function submitworker(e){
         <div>${fullname}</div>
         <div>${role}</div>
         </div>
-        
+        <div class="icons-btn">
+            <button class="details-btn" id="btndetails" data-index="0"><i class="fa-solid fa-circle-info"></i></button>
+            <button class="delete-btn" id="btndelete" data-index="0"><i class="fa-solid fa-xmark"></i></button>
+        </div>
     </div>`;
 
     document.getElementById("worker-name").value = "";
@@ -108,6 +111,116 @@ function submitworker(e){
 
     experiences = [];
     
+
+
+let detailsbtn = listofworkers.querySelectorAll(".details-btn");
+detailsbtn.forEach((btn, i) => {
+    btn.onclick = () => {
+        let worker = unworkers[i];
+
+        document.querySelector(".img-indetails").style.backgroundImage = `url(${worker.image})`;
+        document.querySelector(".img-indetails").style.backgroundSize = "cover";
+        document.querySelector(".det-name").textContent = worker.name;
+        document.querySelector(".det-role").textContent = worker.role;
+        document.querySelector(".det-email").textContent = worker.email;
+        document.querySelector(".det-number").textContent = worker.number;
+        document.querySelector(".det-location").textContent = "Unassigned";
+
+        let expbox = document.querySelector(".exp-details");
+        expbox.innerHTML = "";
+        worker.experiences.forEach(exp => {
+            expbox.innerHTML += `
+                <div style="margin-bottom: 10px; padding: 5px; border-bottom: 1px solid white;">
+                    <strong>${exp.company}</strong><br>
+                    Role: ${exp.role}<br>
+                    From: ${exp.from}<br>
+                    To: ${exp.to}
+                </div>
+            `;
+        });
+
+        document.querySelector(".worker-details").style.display = "block";
+        document.getElementById("all-containers").style.filter = "blur(2px)";
+
+
+
+let deletebtn = listofworkers.querySelectorAll(".delete-btn");
+deletebtn.forEach((btn, i) => {
+    btn.dataset.index = i; 
+    btn.onclick = () => {
+        unworkers.splice(i, 1);
+
+        listofworkers.innerHTML = "";
+
+        // fill the list again after removing
+        unworkers.forEach((worker, index) => {
+            listofworkers.innerHTML += `
+                <div class="workers-lists" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
+                    <div class="img-style" style="width:50px; height:50px; border-radius:50%; background: url('${worker.image}') no-repeat center/cover;"></div>
+                    <div>
+                        <div>${worker.name}</div>
+                        <div>${worker.role}</div>
+                    </div>
+                    <div class="icons-btn">
+                        <button class="details-btn" data-index="${index}"><i class="fa-solid fa-circle-info"></i></button>
+                        <button class="delete-btn" data-index="${index}"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>`;
+        });
+
+        
+        let detailsbtn = listofworkers.querySelectorAll(".details-btn");
+        detailsbtn.forEach((btn, i) => {
+            btn.dataset.index = i;
+            btn.onclick = () => {
+                let worker = unworkers[i];
+
+                document.querySelector(".img-indetails").style.backgroundImage = `url(${worker.image})`;
+                document.querySelector(".img-indetails").style.backgroundSize = "cover";
+                document.querySelector(".det-name").textContent = worker.name;
+                document.querySelector(".det-role").textContent = worker.role;
+                document.querySelector(".det-email").textContent = worker.email;
+                document.querySelector(".det-number").textContent = worker.number;
+                document.querySelector(".det-location").textContent = "Unassigned";
+
+                let expbox = document.querySelector(".exp-details");
+                expbox.innerHTML = "";
+                worker.experiences.forEach(exp => {
+                    expbox.innerHTML += `
+                        <div style="margin-bottom: 10px; padding: 5px; border-bottom: 1px solid white;">
+                            <strong>${exp.company}</strong><br>
+                            Role: ${exp.role}<br>
+                            From: ${exp.from}<br>
+                            To: ${exp.to}
+                        </div>
+                    `;
+                });
+
+                document.querySelector(".worker-details").style.display = "block";
+                document.getElementById("all-containers").style.filter = "blur(2px)";
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
+
+    }
+});
+
+let closedetail = document.getElementById("closedetail")
+closedetail.addEventListener("click", (e) => {
+    document.querySelector(".worker-details").style.display = "none";
+    document.getElementById("all-containers").style.filter = "none";
+})
+
+
+
 }
 imglink.addEventListener("change", (e) => {
         document.getElementById("pre-img").style.backgroundImage = `url(${imglink.value})`;
@@ -115,11 +228,15 @@ imglink.addEventListener("change", (e) => {
     })
 
 
-let workerdetails = document.querySelector(".workers-list")
-workerdetails.addEventListener("click", (e) => {
-    
-})
-    //experience
-    // new array of exp
-    // addEventListener click
+
+let named = document.querySelector(".det-name")
+let roled = document.querySelector(".det-role")
+let emaild = document.querySelector("det-email")
+let numberd = document.querySelector(".det-number")
+let locationd = document.querySelector(".det-location")
+let detexp = document.querySelector(".exp-details")
+
+
+
+
 

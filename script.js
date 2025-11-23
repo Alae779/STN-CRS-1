@@ -1,4 +1,21 @@
 let unworkers = []
+let roomacces = {
+    "conference-room": ["Manager", "Other Roles"],
+    "reception-room": ["Receptionist", "Manager", "Other Roles"],
+    "servers-room": ["IT technician", "Manager"],
+    "security-room": ["Security guard", "Manager"],
+    "staff-room": ["Manager", "Cleaner", "Other Roles"],
+    "archive-room": ["Manager", "Other Roles"] 
+};
+const roomcontainers = {
+    "conference-room": document.querySelector(".aa-workers"),
+    "reception-room": document.querySelector(".ab-workers"),
+    "servers-room": document.querySelector(".abb-workers"),
+    "security-room": document.querySelector(".abc-workers"),
+    "staff-room": document.querySelector(".bab-workers"),
+    "archive-room": document.querySelector(".bac-workers")
+};
+
 let addworker = document.getElementById("add-new-worker")
 addworker.addEventListener("click", (e) => {
     document.getElementById("form-section").style.display = "block";
@@ -83,6 +100,7 @@ function submitworker(e){
         email: email,
         number: number,
         experiences: experiences,
+        location: "Unassigned"
     }
     unworkers.push(workersobj);
     console.log(unworkers);
@@ -154,6 +172,9 @@ closedetail.addEventListener("click", (e) => {
 
 
 }
+
+
+
 imglink.addEventListener("change", (e) => {
         document.getElementById("pre-img").style.backgroundImage = `url(${imglink.value})`;
         document.getElementById("pre-img").style.backgroundSize = "cover";
@@ -175,26 +196,83 @@ let assignbtn = document.querySelectorAll(".btn-add-to-zone")
 const workerstoassign =document.querySelector(".workers-abt-assign")
 assignbtn.forEach(assign => {
     assign.addEventListener("click", (e) => {
+        let roomname = assign.dataset.room;
     document.querySelector(".workers-toadd").style.display = "block";
     document.getElementById("all-containers").style.filter = "blur(2px)";
 
-    let fullname = document.getElementById("worker-name").value;
-    let role = document.getElementsByTagName("select")[0].value;
-    let image = document.getElementById("worker-photo").value;
     workerstoassign.innerHTML = "";
     unworkers.forEach((worker, index) => {
-            workerstoassign.innerHTML += `
-                <div class="workers-lists" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
-                    <div class="img-style" style="width:50px; height:50px; border-radius:50%; background: url('${worker.image}') no-repeat center/cover;"></div>
-                    <div>
-                        <div>${worker.name}</div>
-                        <div>${worker.role}</div>
-                    </div>
-    
-                </div>`;
+        
+    // get allowed roles for this room
+    let allowedroles = roomacces[roomname];
+
+    // dont show workers with not the expected role
+    if (!allowedroles.includes(worker.role)) {
+        return;
+    }
+
+    // affichage dyal workers dyal hadik room exactly
+    workerstoassign.innerHTML += `
+        <div class="workers-lists worker-to-assign" data-index="${index}" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
+            <div class="img-style" style="width:50px; height:50px; border-radius:50%; background: url('${worker.image}') no-repeat center/cover;"></div>
+            <div>
+                <div>${worker.name}</div>
+                <div>${worker.role}</div>
+            </div>
+        </div>`;
         });
      
-   
+   let clickedworker = document.querySelectorAll(".worker-to-assign");
+
+        clickedworker.forEach(elem => {
+
+            elem.addEventListener("click", () => {
+
+                let realindex = elem.dataset.index;
+                let worker = unworkers[realindex];
+
+                // add worker into the correct room
+                roomcontainers[roomname].innerHTML += `
+                    <div class="workers-lists fixed-card" style="display:flex; align-items:center; gap:5px; font-weight:bold;">
+                        <div class="img-style" style="width:32px; height:32px; border-radius:50%;
+                        background:url('${worker.image}') no-repeat center/cover;"></div>
+
+                        <div>
+                            <div style="font-size: small">${worker.name}</div>
+                            <div style="font-size: small">${worker.role}</div>
+                        </div>
+                        <button class="btn-remove"><i class="fa-solid fa-xmark"></i></button>
+                    </div>`;
+                    emptyzone();
+
+                // remove from unassigned array
+                unworkers.splice(realindex, 1);
+
+                // close assign modall
+                document.querySelector(".workers-toadd").style.display = "none";
+                document.getElementById("all-containers").style.filter = "none";
+
+                // update unassigned worker list
+                document.getElementById("workers-list").innerHTML = "";
+                unworkers.forEach(w => {
+                    document.getElementById("workers-list").innerHTML += `
+                        <div class="workers-lists" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
+                            <div class="img-style"
+                                style="width:50px; height:50px; border-radius:50%;
+                                background:url('${w.image}') no-repeat center/cover;"></div>
+                            <div>
+                                <div>${w.name}</div>
+                                <div>${w.role}</div>
+                            </div>
+                                <div class="icons-btn">
+                                    <button class="details-btn" id="btndetails" data-index="0"><i class="fa-solid fa-circle-info"></i></button>
+                                </div>
+                            </div>`;
+                });
+
+            });
+
+        });
     
 })
 
@@ -205,4 +283,16 @@ closeas.addEventListener("click", (e) => {
 })
 })
     
-
+emptyzone();
+// zone empty == red background
+function emptyzone(){
+    let zones = document.querySelectorAll(".cardplace")
+    zones.forEach(zone => {
+        if(zone.querySelector(".fixed-card") == null){
+            zone.parentElement.style.backgroundColor = "rgba(248, 3, 3, 0.30)";
+    }
+        else{
+            zone.parentElement.style.backgroundColor = "transparent";
+        }
+    })
+}

@@ -60,6 +60,7 @@ h2{
     margin-top: 1.2rem;
 }
 .zone-1-a{
+    margin-top: 0.7rem;
     width: 28.4rem;
     height: 13.7rem;
     display: flex;
@@ -71,13 +72,13 @@ h2{
 }
 .zone-1-b{
     width: 28.4rem;
-    height: 28rem;
+    height: 27.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.4rem;
-    margin-top: 2rem;
+    margin-top: 0.2rem;
     margin-left: 0.44rem;
 }
 .zone-container-1{
@@ -101,6 +102,7 @@ h2{
 }
 .zone-1-1{
     width: 16rem;
+    margin-left: 0.1rem;
     height: 14.5rem;
     display: flex;
     flex-direction: column;
@@ -111,6 +113,7 @@ h2{
 }
 .zone-1-2{
     width: 16.6rem;
+    margin-right: 0.5rem;
     height: 14.5rem;
     display: flex;
     flex-direction: column;
@@ -120,7 +123,7 @@ h2{
 }
 .zone-2-1{
     width: 16rem;
-    height: 15rem;
+    height: 14rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -137,12 +140,12 @@ h2{
     align-items: center;
     gap: 0.4rem;
     margin-right: 0.4rem;
-    margin-top: 0.5rem;
 }
 .aa-workers{
     display: flex;
-    height: 7rem;
-    width: 16rem;
+    flex-wrap: wrap;
+    height: 30rem;
+    width: 30rem;
     /* background-color: rgb(238, 230, 221); */
     border-radius: 10px;
 }
@@ -156,13 +159,17 @@ h2{
 }
 .ab-workers{
     display: flex;
+    flex-wrap: wrap;
     height: 14rem;
-    width: 16rem;
+    width: 26rem;
     /* background-color: rgb(238, 230, 221); */
     border-radius: 10px;
+
+    
 }
 .abb-workers{
     display: flex;
+    flex-wrap: wrap;
     height: 8rem;
     width: 13rem;
     /* background-color: rgb(238, 230, 221); */
@@ -170,6 +177,7 @@ h2{
 }
 .abc-workers{
     display: flex;
+    flex-wrap: wrap;
     height: 8rem;
     width: 13rem;
     /* background-color: rgb(238, 230, 221); */
@@ -177,6 +185,7 @@ h2{
 }
 .bab-workers{
     display: flex;
+    flex-wrap: wrap;
     height: 9rem;
     width: 13rem;
     /* background-color: rgb(238, 230, 221); */
@@ -184,6 +193,7 @@ h2{
 }
 .bac-workers{
     display: flex;
+    flex-wrap: wrap;
     height: 9rem;
     width: 13rem;
     /* background-color: rgb(238, 230, 221); */
@@ -389,6 +399,18 @@ h3{
     align-items: center;
     justify-content: center;
 }
+.btn-remove{
+    background-color: rgb(227, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    height: 1.5rem;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #btndelete{
     background-color: rgb(233, 0, 0);
     color: white;
@@ -455,4 +477,8 @@ h3{
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+.fixed-card{
+    height: 1.5rem;
+    width: 9rem;
 }

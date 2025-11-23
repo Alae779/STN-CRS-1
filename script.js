@@ -1,9 +1,9 @@
 let unworkers = []
 let roomacces = {
-    "conference-room": ["Manager", "Other Roles"],
-    "reception-room": ["Receptionist", "Manager", "Other Roles"],
-    "servers-room": ["IT technician", "Manager"],
-    "security-room": ["Security guard", "Manager"],
+    "conference-room": ["Manager", "Cleaner" , "Other Roles"],
+    "reception-room": ["Receptionist", "Cleaner" , "Manager"],
+    "servers-room": ["IT technician", "Manager" , "Cleaner"],
+    "security-room": ["Security guard", "Manager" , "Cleaner"],
     "staff-room": ["Manager", "Cleaner", "Other Roles"],
     "archive-room": ["Manager", "Other Roles"] 
 };

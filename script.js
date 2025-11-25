@@ -1,11 +1,11 @@
 let unworkers = []
 let roomacces = {
-    "conference-room": ["Manager", "Cleaner" , "Other Roles"],
-    "reception-room": ["Receptionist", "Cleaner" , "Manager"],
-    "servers-room": ["IT technician", "Manager" , "Cleaner"],
-    "security-room": ["Security guard", "Manager" , "Cleaner"],
-    "staff-room": ["Manager", "Cleaner", "Other Roles"],
-    "archive-room": ["Manager", "Other Roles"] 
+    "conference-room": ["Manager", "Cleaner" , "Other Roles", "Security guard", "IT technician","Receptionist"],
+    "reception-room": ["Receptionist", "Manager"],
+    "servers-room": ["IT technician", "Manager" ,],
+    "security-room": ["Security guard", "Manager"],
+    "staff-room": ["Manager", "Cleaner", "Security guard", "IT technician", "Cleaner", "Receptionist"],
+    "archive-room": ["Manager", "Cleaner", "Security guard", "IT technician", "Receptionist"] 
 };
 const roomcontainers = {
     "conference-room": document.querySelector(".aa-workers"),
@@ -150,7 +150,7 @@ detailsbtn.forEach((btn, i) => {
                 <div style="margin-bottom: 10px; padding: 5px; border-bottom: 1px solid white;">
                     <strong>${exp.company}</strong><br>
                     Role: ${exp.role}<br>
-                    From: ${exp.from}<br>
+                    From: ${exp.from}<br>o
                     To: ${exp.to}
                 </div>
             `;
@@ -182,12 +182,12 @@ imglink.addEventListener("change", (e) => {
 
 
 
-let named = document.querySelector(".det-name")
-let roled = document.querySelector(".det-role")
-let emaild = document.querySelector("det-email")
-let numberd = document.querySelector(".det-number")
-let locationd = document.querySelector(".det-location")
-let detexp = document.querySelector(".exp-details")
+// let named = document.querySelector(".det-name")
+// let roled = document.querySelector(".det-role")
+// let emaild = document.querySelector("det-email")
+// let numberd = document.querySelector(".det-number")
+// let locationd = document.querySelector(".det-location")
+// let detexp = document.querySelector(".exp-details")
 
 
 
@@ -197,30 +197,31 @@ const workerstoassign =document.querySelector(".workers-abt-assign")
 assignbtn.forEach(assign => {
     assign.addEventListener("click", (e) => {
         let roomname = assign.dataset.room;
-    document.querySelector(".workers-toadd").style.display = "block";
-    document.getElementById("all-containers").style.filter = "blur(2px)";
+        document.querySelector(".workers-toadd").style.display = "block";
+        document.getElementById("all-containers").style.filter = "blur(2px)";
 
-    workerstoassign.innerHTML = "";
-    unworkers.forEach((worker, index) => {
-        
-    // get allowed roles for this room
-    let allowedroles = roomacces[roomname];
+        workerstoassign.innerHTML = "";
+        unworkers.forEach((worker, index) => {
+                
+            // get allowed roles for this room
+            let allowedroles = roomacces[roomname];
 
-    // dont show workers with not the expected role
-    if (!allowedroles.includes(worker.role)) {
-        return;
-    }
+            // dont show workers with not the expected role
+            if (!allowedroles.includes(worker.role)) {
+                return;
+            }
 
-    // affichage dyal workers dyal hadik room exactly
-    workerstoassign.innerHTML += `
-        <div class="workers-lists worker-to-assign" data-index="${index}" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
-            <div class="img-style" style="width:50px; height:50px; border-radius:50%; background: url('${worker.image}') no-repeat center/cover;"></div>
-            <div>
-                <div>${worker.name}</div>
-                <div>${worker.role}</div>
-            </div>
-        </div>`;
-        });
+            // affichage dyal workers dyal hadik room exactly
+            workerstoassign.innerHTML += `
+                <div class="workers-lists worker-to-assign" data-index="${index}" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
+                    <div class="img-style" style="width:50px; height:50px; border-radius:50%; background: url('${worker.image}') no-repeat center/cover;"></div>
+                    <div>
+                        <div>${worker.name}</div>
+                        <div>${worker.role}</div>
+                    </div>
+                </div>`;
+    });
+
      
    let clickedworker = document.querySelectorAll(".worker-to-assign");
 
@@ -237,9 +238,9 @@ assignbtn.forEach(assign => {
                         <div class="img-style" style="width:32px; height:32px; border-radius:50%;
                         background:url('${worker.image}') no-repeat center/cover;"></div>
 
-                        <div>
-                            <div style="font-size: small">${worker.name}</div>
-                            <div style="font-size: small">${worker.role}</div>
+                        <div class="infos">
+                            <div class="nnname">${worker.name}</div>
+                            <div class="rrrole">${worker.role}</div>
                         </div>
                         <button class="btn-remove"><i class="fa-solid fa-xmark"></i></button>
                     </div>`;
@@ -256,7 +257,7 @@ assignbtn.forEach(assign => {
                 document.getElementById("workers-list").innerHTML = "";
                 unworkers.forEach(w => {
                     document.getElementById("workers-list").innerHTML += `
-                        <div class="workers-lists" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
+                           <div class="workers-lists" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
                             <div class="img-style"
                                 style="width:50px; height:50px; border-radius:50%;
                                 background:url('${w.image}') no-repeat center/cover;"></div>

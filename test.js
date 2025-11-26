@@ -2,7 +2,7 @@ let unworkers = []
 let roomacces = {
     "conference-room": ["Manager", "Cleaner" , "Other Roles", "Security guard", "IT technician","Receptionist"],
     "reception-room": ["Receptionist", "Manager"],
-    "servers-room": ["IT technician", "Manager"],
+    "servers-room": ["IT technician", "Manager" ,],
     "security-room": ["Security guard", "Manager"],
     "staff-room": ["Manager", "Cleaner", "Security guard", "IT technician", "Cleaner", "Receptionist"],
     "archive-room": ["Manager", "Cleaner", "Security guard", "IT technician", "Receptionist"] 
@@ -103,16 +103,7 @@ function submitworker(e){
         location: "Unassigned"
     }
     unworkers.push(workersobj);
-    console.log(unworkers)
-    
-
-
-    unworkers.forEach(wor => {
-        console.log(workersobj.name)
-    })
-
-
-
+    console.log(unworkers);
     let listofworkers = document.getElementById("workers-list")
     listofworkers.innerHTML += `
         
@@ -203,7 +194,6 @@ imglink.addEventListener("change", (e) => {
 
 let assignbtn = document.querySelectorAll(".btn-add-to-zone")
 const workerstoassign =document.querySelector(".workers-abt-assign")
-
 assignbtn.forEach(assign => {
     assign.addEventListener("click", (e) => {
         let roomname = assign.dataset.room;
@@ -213,12 +203,15 @@ assignbtn.forEach(assign => {
         workerstoassign.innerHTML = "";
         unworkers.forEach((worker, index) => {
                 
+            // get allowed roles for this room
             let allowedroles = roomacces[roomname];
 
+            // dont show workers with not the expected role
             if (!allowedroles.includes(worker.role)) {
                 return;
             }
 
+            // affichage dyal workers dyal hadik room exactly
             workerstoassign.innerHTML += `
                 <div class="workers-lists worker-to-assign" data-index="${index}" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
                     <div class="img-style" style="width:50px; height:50px; border-radius:50%; background: url('${worker.image}') no-repeat center/cover;"></div>
@@ -262,8 +255,6 @@ assignbtn.forEach(assign => {
 
                 // update unassigned worker list
                 document.getElementById("workers-list").innerHTML = "";
-
-                
                 unworkers.forEach(w => {
                     document.getElementById("workers-list").innerHTML += `
                            <div class="workers-lists" style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
@@ -306,6 +297,7 @@ function emptyzone(){
         }
     })
 }
+
 
 
 
